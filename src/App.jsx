@@ -1,62 +1,63 @@
 import { useRef, useState } from "react";
 import "./App.css";
 
-const messages = ["Almost!", "Try harder 😏", "Nice try 😜"];
+/* ✨ CUSTOMIZE NAME HERE ✨ */
+const NAME = "Avni Verma 💕";
 
 function App() {
   const noBtnRef = useRef(null);
-
-  const [noPos, setNoPos] = useState(null); // null = fixed
-  const [msgIndex, setMsgIndex] = useState(0);
   const [showSurprise, setShowSurprise] = useState(false);
 
   const moveNoButton = () => {
     const btn = noBtnRef.current;
-    const btnWidth = btn.offsetWidth;
-    const btnHeight = btn.offsetHeight;
     const padding = 20;
 
-    const maxX = window.innerWidth - btnWidth - padding;
-    const maxY = window.innerHeight - btnHeight - padding;
+    const maxX = window.innerWidth - btn.offsetWidth - padding;
+    const maxY = window.innerHeight - btn.offsetHeight - padding;
 
-    setNoPos({
-      left: Math.random() * maxX,
-      top: Math.random() * maxY
-    });
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
 
-    setMsgIndex((prev) => (prev + 1) % messages.length);
+    btn.style.position = "fixed";
+    btn.style.left = `${x}px`;
+    btn.style.top = `${y}px`;
   };
 
   if (showSurprise) {
     return (
-      <div className="container">
-        <h1 className="surprise">💖 Yayyyyayayaya 🥳💖</h1>
-        <h2>You are my Valentine now 😘</h2>
+      <div className="page center">
+        <div className="hearts"></div>
+        <h1>💖 Surprise! 💖</h1>
+        <h2>{NAME}, you’re my Valentine</h2>
+        <p>You just made my day a little brighter ✨</p>
       </div>
     );
   }
 
   return (
-    <div className="container">
-      <h1>Will you be my Valentine? 💘</h1>
+    <div className="page center">
+      <div className="hearts"></div>
 
-      <div className="btn-row">
-        <button className="yes-btn" onClick={() => setShowSurprise(true)}>
-          Yes ❤️
-        </button>
+      <div className="card">
+        <h1>Hey {NAME}</h1>
+        <p>I wanted to ask you something special…</p>
 
-        <button
-          ref={noBtnRef}
-          className="no-btn"
-          style={
-            noPos
-              ? { position: "absolute", top: noPos.top, left: noPos.left }
-              : {}
-          }
-          onMouseEnter={moveNoButton}
-        >
-          {noPos ? messages[msgIndex] : "No 💔"}
-        </button>
+        <h2 className="question">Will you be my Valentine? 💘</h2>
+
+        <div className="buttons">
+          <button className="yes" onClick={() => setShowSurprise(true)}>
+            Yes ❤️
+          </button>
+
+          <button
+            ref={noBtnRef}
+            className="no"
+            onMouseEnter={moveNoButton}
+            onTouchStart={moveNoButton}
+          >
+            No 💔
+          </button>
+        </div>
       </div>
     </div>
   );

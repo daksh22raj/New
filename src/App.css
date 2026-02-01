@@ -1,47 +1,109 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   height: 100vh;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: linear-gradient(135deg, #ffb6c1, #ffd6e0);
+  overflow: hidden;
 }
 
-.container {
+.page {
   height: 100vh;
+  position: relative;
+}
+
+.center {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
+}
+
+/* 💗 Floating hearts */
+.hearts::before,
+.hearts::after {
+  content: "💗 💕 💖 💘";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 26px;
+  opacity: 0.4;
+  animation: float 14s linear infinite;
+}
+
+.hearts::after {
+  animation-delay: 7s;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+/* Card */
+.card {
+  background: white;
+  padding: 45px 40px;
+  border-radius: 22px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  z-index: 2;
 }
 
 h1 {
   color: #b8005c;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
-.btn-row {
+h2 {
+  color: #800040;
+}
+
+p {
+  color: #7a003c;
+  font-size: 18px;
+}
+
+.question {
+  margin: 20px 0;
+}
+
+/* Buttons */
+.buttons {
   display: flex;
   gap: 20px;
+  justify-content: center;
 }
 
 button {
-  padding: 12px 28px;
+  padding: 14px 34px;
   font-size: 18px;
   border: none;
-  border-radius: 25px;
+  border-radius: 30px;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.yes-btn {
+button:hover {
+  transform: scale(1.05);
+}
+
+/* Yes button */
+.yes {
   background: #ff4d6d;
   color: white;
+  box-shadow: 0 0 16px rgba(255, 77, 109, 0.6);
 }
 
-.no-btn {
+/* No button */
+.no {
   background: #555;
   color: white;
-  transition: top 0.2s ease, left 0.2s ease;
-}
-
-.surprise {
-  font-size: 40px;
 }
